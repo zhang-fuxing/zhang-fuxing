@@ -268,7 +268,7 @@ new Thread(()->{}).start();
 
 #### collection
 
-![集合框架](C:\Users\zfx\Desktop\workspaces\note\1\zhang-fuxing\imgs\集合1.png)
+![集合框架](./imgs/集合1.png)
 集合只用于存储对象，集合长度是可变的，集合可以存储不同类型的对象。
 Collection方法：
 
@@ -291,7 +291,7 @@ toArray()	// 把集合转成数组，可以实现集合的遍历
 iterator()	// 迭代器，集合的专用遍历方式
 ```
 
-![coolection](C:\Users\zfx\Desktop\workspaces\note\1\zhang-fuxing\imgs\Collection_02.png)
+![coolection](./imgs/Collection_02.png)
 Collections工具类
 
 ``` java
@@ -311,7 +311,7 @@ Map<K,V> synchronizedMap(Map<K,V> m)//返回支持的同步（线程安全的）
 ```
 
 Arrays工具类
-![Arrays](C:\Users\zfx\Desktop\workspaces\note\1\zhang-fuxing\imgs\arraysM.png)
+![Arrays](./imgs/arraysM.png)
 
 #### Map
 
@@ -407,7 +407,7 @@ findAny()	获取流中的任意一个元素
 
 ### I/O 流
 
-![img](C:\Users\zfx\Desktop\workspaces\note\1\zhang-fuxing\imgs\iostream2xx.png)
+![img](./imgs/iostream2xx.png)
 
 #### File类
 
