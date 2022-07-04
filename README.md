@@ -407,7 +407,7 @@ findAny()	获取流中的任意一个元素
 
 ### I/O 流
 
-![img](C:\Users\zfx\Desktop\workspaces\note\1\zhang-fuxing\imgs\iostream2xx.png)
+![img](.\imgs\iostream2xx.png)
 
 #### File类
 
