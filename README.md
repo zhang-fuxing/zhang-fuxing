@@ -4,7 +4,11 @@
 
 ### 基础语法
 
-数据类型：	1.byte	 2.sort	  3.int	 4.long	 5.double	 6.float	 7.char	 8.boolean
+基础数据类型：	1.byte	 2.sort	  3.int	 4.long	 5.double	 6.float	 7.char	 8.boolean
+
+String     使用final修饰，不可继承；内部使用final修饰的char数组存储数据，被初始化后不能被改变
+
+
 
 循环：
 
@@ -760,6 +764,154 @@ public static void main(String[] args) {
                 .execute();
     }
 ```
+
+
+
+## hibernate
+
+
+
+### 1.HQL
+
+- 关键子不区分大小写，表名，属性名区分
+
+1. form
+
+```java
+// User 可以指定全路径名
+String hql = " form User";
+Query query = session.createQuery(hql);
+List result = query.list();
+```
+
+2. as
+
+```java
+String hql = " form User as u";
+Query query = session.createQuery(hql);
+List result = query.list();
+```
+
+3. select
+
+```java
+String hql = "SELECT U.name FROM User U";
+Query query = session.createQuery(hql);
+List results = query.list();
+```
+
+4. where
+
+```java
+String hql = "FROM User U WHERE U.id = 10";
+Query query = session.createQuery(hql);
+List results = query.list();
+```
+
+5. order by
+
+```java
+String hql = "FROM User U WHERE U.id > 10 " +
+             "ORDER BY U.name DESC, U.salary DESC ";
+Query query = session.createQuery(hql);
+List results = query.list();
+```
+
+6. group by
+
+```java
+String hql = "SELECT SUM(u.salary), u.name FROM User u " +
+             "GROUP BY u.name";
+Query query = session.createQuery(hql);
+List results = query.list();
+```
+
+7. 设置参数
+
+```java
+String hql = "FROM User u WHERE u.id = :uid";
+Query query = session.createQuery(hql);
+query.setParameter("uid",10);
+List results = query.list();
+```
+
+8. update
+
+```java
+String hql = "UPDATE User set salary = :salary "  + 
+             "WHERE id = :uid";
+Query query = session.createQuery(hql);
+query.setParameter("salary", 1000);
+query.setParameter("uid", 10);
+int result = query.executeUpdate();
+System.out.println("Rows affected: " + result);
+```
+
+9. delete
+
+```java
+String hql = "DELETE FROM User "  + 
+             "WHERE id = :uid";
+Query query = session.createQuery(hql);
+query.setParameter("uid", 10);
+int result = query.executeUpdate();
+System.out.println("Rows affected: " + result);
+```
+
+10. insert
+
+```java
+String hql = "INSERT INTO User(firstName, lastName, salary)"  + 
+             "SELECT firstName, lastName, salary FROM old_user";
+Query query = session.createQuery(hql);
+int result = query.executeUpdate();
+System.out.println("Rows affected: " + result);
+```
+
+11. 聚合函数
+
+```java
+// avg(property name)
+// count(property name or *)
+// max(property name)
+// min(property name)
+// sum(property name)
+
+```
+
+12. 去重
+
+```java
+// distinct
+String hql = "SELECT count(distinct u.name) FROM User u";
+Query query = session.createQuery(hql);
+List results = query.list();
+```
+
+13. 分页
+
+```java
+// 该方法以一个整数表示结果中的第一行,从 0 行开始。
+// 从哪儿开始
+Query setFirstResult(int startPosition)
+    
+// 这个方法告诉 Hibernate 来检索固定数量，即 maxResults 个对象。
+// 到哪儿结束
+Query setMaxResults(int maxResult)
+
+// 例
+String hql = "FROM User";
+Query query = session.createQuery(hql);
+query.setFirstResult(1);
+query.setMaxResults(10);
+List results = query.list();
+```
+
+### 2、标准查询
+
+
+
+
 
 
 
