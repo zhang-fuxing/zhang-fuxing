@@ -268,6 +268,45 @@ new Thread() {
 new Thread(()->{}).start();
 ```
 
+#### CompletableFuture异步编排
+``` java
+ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                Runtime.getRuntime().availableProcessors(),
+                5, 3, TimeUnit.MINUTES,
+                new LinkedBlockingQueue<>(), Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.DiscardOldestPolicy());
+        
+        CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
+            long l1 = System.currentTimeMillis();
+            for (int i = 0; i < 100_000_000; i++) {
+            }
+            long l2 = System.currentTimeMillis();
+            System.out.println(Thread.currentThread().getName()+ " 时间: " + (l2-l1));
+        }, executor);
+
+        CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
+            long l1 = System.currentTimeMillis();
+            for (int i = 0; i < 10_000_000; i++) {
+            }
+            long l2 = System.currentTimeMillis();
+            System.out.println(Thread.currentThread().getName()+ " 时间: " + (l2-l1));
+        }, executor);
+        CompletableFuture<Void> future3 = CompletableFuture.runAsync(() -> {
+            long l1 = System.currentTimeMillis();
+            for (int i = 0; i < 1_000_000; i++) {
+            }
+            long l2 = System.currentTimeMillis();
+            System.out.println(Thread.currentThread().getName()+ " 时间: " + (l2-l1));
+        }, executor);
+
+        long l1 = System.currentTimeMillis();
+        for (int i = 0; i < 1_000_000_000; i++) {
+        }
+        long l2 = System.currentTimeMillis();
+        System.out.println(Thread.currentThread().getName()+ " 时间: " + (l2-l1));
+        CompletableFuture.allOf(future1, future2, future3).get();
+```
+
 ### 集合框架
 
 #### collection
