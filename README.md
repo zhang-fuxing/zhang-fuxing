@@ -8,11 +8,9 @@
 
 String     使用final修饰，不可继承；内部使用final修饰的char数组存储数据，被初始化后不能被改变
 
-
-
 循环：
 
-``` java
+```java
 // 1.for i
 for(int i=0 ; i<??;i++) {}
 
@@ -21,25 +19,23 @@ for (Object obj : list) {}
 
 // 3. while
 while(boolean flag) {
-    
+  
 }
 
 // 4.do while
 do {
-    
+  
 } while(boolean flag)
 ```
 
 分支：
 
-``` java
+```java
 if
 if else
 switch case
 ? :
 ```
-
-
 
 ### 注解反射
 
@@ -55,7 +51,7 @@ switch case
 
 类加载器也是Java类，因为其它java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是java类，这正是BootStrap
 
-``` java
+```java
 ClassLoader
 方法	说明
 getParent()	获取上级类加载器
@@ -73,7 +69,7 @@ defineClass()	把Class的字节数组byte[]转成Class
 Class 字节码
 Class 类的实例表示正在运行的 Java 应用程序中的类和接口
 
-``` java 
+```java
 forName()	通过类名获取类的字节码
 getClassLoader()	获取该类的类加载器
 getInterfaces()	获取所实现的接口
@@ -87,7 +83,7 @@ isArray()	判定此 Class 对象是否表示一个数组类
 getResourceAsStream()	查找具有给定名称的资源
 ```
 
-``` java
+```java
 获取注解
 方法	说明
 getAnnotation()	获取指定类型的注解
@@ -164,7 +160,7 @@ setXXX(Object obj, XXX value)	如果当前属性为基本类型，可以使用se
 
 一个自定义注解
 
-``` java
+```java
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ViewInject {
@@ -175,7 +171,7 @@ public @interface ViewInject {
 
 @Target 表示注解的作用目标，是一个枚举值
 
-``` java
+```java
 @Target(ElementType.TYPE)	用于接口(注解本质上也是接口),类,枚举
 @Target(ElementType.FIELD)	用于字段,枚举常量
 @Target(ElementType.METHOD)	用于方法
@@ -190,7 +186,7 @@ public @interface ViewInject {
 @Retention
 表示注解的保存策略，也是一个枚举值
 
-``` java
+```java
 RetentionPolicy.SOURCE	注解只保存在源代码中，即.java文件
 RetentionPolicy.CLASS	注解保存在字节码中,即.class文件
 RetentionPolicy.RUNTIME	注解保存在内存中的字节码，可用于反射
@@ -202,8 +198,6 @@ RetentionPolicy.RUNTIME	注解保存在内存中的字节码，可用于反射
 @Inherited
 是否可以被继承，默认为 false
 
-
-
 ### 多线程
 
 进程：进程就是正在运行的程序，是系统进行资源分配和调用的独立单位。
@@ -211,7 +205,7 @@ RetentionPolicy.RUNTIME	注解保存在内存中的字节码，可用于反射
 多线程意义：其实是为了提高应用程序的使用率。程序的执行其实都是在抢CPU的资源，CPU的执行权。
 进程与线程的区别
 
-``` text
+```text
 调度：线程作为CUP调度和分配的基本单位，进程作为拥有资源的基本单位。
 并发性：不仅进程之间可以并发执行，同一个进程的多个线程之间也可并发执行。
 拥有资源：进程是拥有资源的一个独立单位，线程不拥有系统资源，但可以访问隶属于进程的资源。
@@ -223,7 +217,7 @@ RetentionPolicy.RUNTIME	注解保存在内存中的字节码，可用于反射
 
 1：继承Thread类，重写run()方法
 
-``` java
+```java
 // 线程启动：
 // Thread.start()启动线程
 public final String getName()// 获取线程的名称
@@ -233,7 +227,7 @@ Thread(String name)// 通过构造方法给线程起名字
 
 2：实现Runnable接口，覆写run()方法
 
-``` java
+```java
 // 线程启动方法
 // 创建Runnable实现类对象，把对象传给Thread的构造方法，调用start()启动线程
 class Thread1 implements Runnable {
@@ -247,7 +241,7 @@ main(String[] args) {
 
 3：实现Callable接口,重写call()方法
 
-``` java
+```java
 // 线程启动方法
 // 创建线程池对象
 // public static ExecutorService newFixedThreadPool(int nThreads)
@@ -260,7 +254,7 @@ pool.shutdown();
 
 4:匿名内部类或labmda表达式
 
-``` java
+```java
 // 内部类
 new Thread() {
 
@@ -269,13 +263,14 @@ new Thread(()->{}).start();
 ```
 
 #### CompletableFuture异步编排
-``` java
+
+```java
 ThreadPoolExecutor executor = new ThreadPoolExecutor(
                 Runtime.getRuntime().availableProcessors(),
                 5, 3, TimeUnit.MINUTES,
                 new LinkedBlockingQueue<>(), Executors.defaultThreadFactory(),
                 new ThreadPoolExecutor.DiscardOldestPolicy());
-        
+    
         CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
             long l1 = System.currentTimeMillis();
             for (int i = 0; i < 100_000_000; i++) {
@@ -315,7 +310,7 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 集合只用于存储对象，集合长度是可变的，集合可以存储不同类型的对象。
 Collection方法：
 
-``` java
+```java
 add() //添加元素
 addAll() //添加一个集合的元素
 
@@ -337,7 +332,7 @@ iterator()	// 迭代器，集合的专用遍历方式
 ![coolection](./imgs/Collection_02.png)
 Collections工具类
 
-``` java
+```java
 public static <T> void sort(List<T> list)
 public static <T> int binarySearch(List<?> list,T key)
 public static <T> T max(Collection<?> coll)
@@ -422,12 +417,12 @@ filter()	过滤
 map()	转换
 mapToXxx()	一对一转换
 flatMap()	集合扁平化
-flatMapToXxx()	
-peek()	
-skip()	
+flatMapToXxx()
+peek()
+skip()
 distinct()	去重
 sorted()	排序
-limit()	
+limit()
 concat()	合并流
 ```
 
@@ -441,9 +436,9 @@ reduce()	合并流中的元素
 min()	最小值
 max()	最大值
 count()	获取流中元素的数量
-anyMatch()	
-allMatch()	
-nonMatch()	
+anyMatch()
+allMatch()
+nonMatch()
 findFirst()	获取流中的第一个元素
 findAny()	获取流中的任意一个元素
 ```
@@ -477,7 +472,7 @@ renamneTo(File dest)	路径名相同就是重命名，不一样就是改名加�
 
 判断功能
 
-``` java
+```java
 方法	功能描述
 isDirectory()	判断是否是目录
 isFile()	判断是否是文件
@@ -490,7 +485,7 @@ isAbsolute()	是否是绝对路径
 
 获取功能
 
-``` java
+```java
 返回值	方法	功能描述
 String	getAbsolutePath()	获取绝对路径
 String	getPath()	获取相对路径
@@ -506,7 +501,7 @@ File[]	listFiles()	获取指定目录下的所有文件或文件夹的File数组
 
 高级获取功能
 
-``` java
+```java
 返回值	方法	功能描述
 String[]	list(FilenameFilter filter)	返回满足条件的文件名数组
 File[]	listFiles(FilenameFilter filter)	返回满足条件的文件数组
@@ -517,7 +512,7 @@ File[]	listRoots()	列出系统所有的根路径
 
 字节流写数据的方式
 
-``` java
+```java
 方法	说明
 write(int b)	一次写一个字节
 write(byte[] b)	一次写一个字节数组
@@ -528,7 +523,7 @@ close()	释放资源
 
 字节流读数据的方式
 
-``` java
+```java
 方法	功能描述
 int read()	一次读取一个字节
 int read(byte[] b)	一次读取一个字节数组
@@ -538,7 +533,7 @@ void close()	释放资源
 
 #### 字符IO流
 
-``` java
+```java
 方法	功能描述
 write(int c)	写入一个字符
 write(char[] cbuf)	写入一个字符数组
@@ -569,16 +564,13 @@ java 发送邮件
 </dependency>
 ```
 
-
-
-
 ## mysql
 
 ### 安装
 
 配置文件
 
-``` ini
+```ini
 [client]
 port=3307
 default-character-set=utf8
@@ -605,24 +597,21 @@ explicit_defaults_for_timestamp=true
 
 ##### 8
 
-​	url: jdbc:mysql://localhost:3306/bs-mall?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/bs-mall?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
 
-​	driver: com.mysql.cj.jdbc.Driver
+    driver: com.mysql.cj.jdbc.Driver
 
 ##### 5.7
 
-​	url: jdbc:mysql://localhost:3306/bs-mall?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/bs-mall?useUnicode=true&characterEncoding=utf8&useSSL=false
 
-​	driver: com.mysql.jdbc.Driver
-
-
-
+    driver: com.mysql.jdbc.Driver
 
 ## mybatis
 
 maven依赖
 
-``` xml
+```xml
 <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 <dependency>
     <groupId>org.mybatis</groupId>
@@ -633,7 +622,7 @@ maven依赖
 
 整合spring
 
-``` xml
+```xml
 <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 <dependency>
     <groupId>org.mybatis</groupId>
@@ -644,7 +633,7 @@ maven依赖
 
 整合springboot
 
-``` xml
+```xml
 <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 <dependency>
     <groupId>org.mybatis.spring.boot</groupId>
@@ -655,7 +644,7 @@ maven依赖
 
 plus
 
-``` xml
+```xml
 <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
 <dependency>
     <groupId>com.baomidou</groupId>
@@ -668,7 +657,7 @@ plus
 
 maven插件
 
-``` xml
+```xml
 <plugin>
     <groupId>org.mybatis.generator</groupId>
     <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -684,7 +673,7 @@ maven插件
 
 generatorConfig.xml内容
 
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
@@ -700,7 +689,7 @@ generatorConfig.xml内容
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/mall?useSSL=false&amp;serverTimezone=UTC" userId="root" password="000000">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/mall?useSSL=false&serverTimezone=UTC" userId="root" password="000000">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -726,7 +715,7 @@ generatorConfig.xml内容
 
 mybatis的xml文件约束
 
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zfx.mall.dao.UserSpecDAO">
@@ -740,7 +729,7 @@ mybatis的xml文件约束
 
 1.相关依赖
 
-``` xml
+```xml
     <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
     <dependency>
         <groupId>com.baomidou</groupId>
@@ -768,7 +757,7 @@ mybatis的xml文件约束
 
 2.代码生成器
 
-``` java
+```java
 public static void main(String[] args) {
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/bs-mall?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8",
                         "root", "000000")
@@ -804,11 +793,7 @@ public static void main(String[] args) {
     }
 ```
 
-
-
 ## hibernate
-
-
 
 ### 1.HQL
 
@@ -933,7 +918,7 @@ List results = query.list();
 // 该方法以一个整数表示结果中的第一行,从 0 行开始。
 // 从哪儿开始
 Query setFirstResult(int startPosition)
-    
+  
 // 这个方法告诉 Hibernate 来检索固定数量，即 maxResults 个对象。
 // 到哪儿结束
 Query setMaxResults(int maxResult)
@@ -948,17 +933,149 @@ List results = query.list();
 
 ### 2、标准查询
 
+## spring boot
+
+### 动态数据源配置
+
+原理：spring boot在连接数据源时会执行 `AbstractRoutingDataSource`类下的 `protected Object determineCurrentLookupKey()`方法获取数据源的配置，所以只要继承并实现该方法，动态获取到数据源链接即可实现动态数据源的切换；
+
+1. spring boot的配置文件中准备好多套数据源配置，例：
+
+```yaml
+spring:
+  datasource:
+    # 数据源基本配置
+    driver-class-name: oracle.jdbc.OracleDriver
+    type: com.alibaba.druid.pool.DruidDataSource
+    master:
+      username: dbo
+      password: ksspasswjs
+      url: jdbc:oracle:thin:@192.168.235.249:1521:basedb
+    slave1:
+      username: sys
+      password: root
+      url: jdbc:oracle:thin:@192.168.235.249:1521:basedb
+    slave2:
+      username: root
+      password: 000000
+      url: jdbc:oracle:thin:@192.168.235.249:1521:basedb
+
+```
+
+2. 创建 `AbstractRoutingDataSource`类的实现类
+
+DynamicDataSource.java
+
+```java
+public class DynamicDataSource extends AbstractRoutingDataSource {
+	@Override
+	protected Object determineCurrentLookupKey() {
+		return RoutingDataSourceContext.get();
+	}
+}
+```
+
+3. config中创建多个数据源，注册数据源并且指定默认数据源
+
+DataSourceConfig.java
+
+```java
+@Configuration
+@EnableJpaRepositories
+@EnableTransactionManagement
+public class DataSourceConfig{
+    // 根据master配置创建数据源
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.master")
+    public DataSource dataSource() {
+        log.info("创建dataSource");
+        return DataSourceBuilder.create().type(com.alibaba.druid.pool.DruidDataSource.class).build();
+    }
+    // 根据slave1配置创建数据源
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.slave1")
+    public DataSource slaveDataSource() {
+        log.info("创建数据源2");
+        return DataSourceBuilder.create().type(com.alibaba.druid.pool.DruidDataSource.class).build();
+    }
+    // 根据slave1配置创建数据源
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.slave2")
+    public DataSource slaveDataSource0() {
+        log.info("创建数据源3");
+        return DataSourceBuilder.create().type(com.alibaba.druid.pool.DruidDataSource.class).build();
+    }
+  
+
+    // 将创建好的多数据源添加到主数据源中，指定默认数据源
+    @Bean
+    @Primary
+    public DataSource primaryDataSource(@Autowired @Qualifier("dataSource") DataSource master,
+                                        @Autowired @Qualifier("slaveDataSource") DataSource slave，
+					@Autowired @Qualifier("slaveDataSource0") DataSource slave0，) {
+  
+        DynamicDataSource source = new DynamicDataSource();
+        Map<Object, Object> map = new HashMap<>();
+        map.put("master", master);
+        map.put("slave1",slave);
+        map.put("slave1",slave0);
+        source.setDefaultTargetDataSource(master);
+        source.setTargetDataSources(map);
+        return source;
+    }
+  
+    @Bean
+    public LocalSessionFactoryBean localSessionFactoryBean() {
+        log.info("创建localSessionFactoryBean");
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+        sessionFactoryBean.setDataSource(dataSource());
+        sessionFactoryBean.setPackagesToScan(packagesToScan);
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        sessionFactoryBean.setConfigLocation(resolver.getResource(configLocation));
+        return sessionFactoryBean;
+    }
+
+
+}
+```
+
+4. 创建切换动态数据源的工具类，通过thread local变量来保证数据安全
+
+```java
+public class RoutingDataSourceContext {
+	private static final ThreadLocal<String> THREAD_LOCAL = new ThreadLocal<>();
+
+	public static void set(String key) {
+		THREAD_LOCAL.set(key);
+	}
+
+	public static String get() {
+		String key = THREAD_LOCAL.get();
+		return key == null ? "master": key;
+	}
+
+	public static void close() {
+		THREAD_LOCAL.remove();
+	}
+}
+```
+
+5. 切换数据源： 调用RoutingDataSourceContext.set(String);
 
 
 
 
 
 
-## spring boot 
+
+
+
+
+
 
 ### 工具类
 
-#####  Assert 
+##### Assert
 
 ```java
 // 要求参数 object 必须为非空（Not Null），否则抛出异常，不予放行
@@ -981,7 +1098,7 @@ void isInstanceOf(Class type, Object obj, String message)
 void isAssignable(Class superType, Class subType, String message)
 ```
 
-#####  ObjectUtils
+##### ObjectUtils
 
 **获取对象的基本信息**
 
@@ -1209,7 +1326,7 @@ InputStream getInputStream()
 String getDescription()
 ```
 
-##### **StreamUtils** 
+##### **StreamUtils**
 
 **输入**
 
@@ -1336,15 +1453,20 @@ Object currentProxy()
 
 ## window控制台命令
 
-``` cmd
+```cmd
 netstat -aon | findstr "port" -- 查看端口使用情况
 tasklist | findstr "进程号/程序名" -- 查看指定进程号的应用名
 taskkill /f /t /im 应用程序名 -- 关闭指定的应用程序，释放端口
+taskkill /f /t /pid 1234  -- 根据pid杀死进程
 ```
+
+
+
+
 
 ## 加密工具
 
-``` java
+```java
 package com.z.common.util;
 
 
@@ -1639,7 +1761,4 @@ public class EncryptUtils {
 }
 ```
 
-
-
 # end
-
